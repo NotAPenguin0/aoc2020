@@ -8,7 +8,6 @@ using Pw = std::string;
 
 int part1(std::vector<Pw> const& passwords) {
 	int count = 0;
-
 	std::vector<std::string> req_fields = { "ecl", "pid", "eyr", "hcl", "byr", "iyr", "hgt" };
 	for (auto const& pw : passwords) {
 		bool match = true;
@@ -20,7 +19,6 @@ int part1(std::vector<Pw> const& passwords) {
 		}
 		if (match) ++count;
 	}
-
 	return count;
 }
 
