@@ -41,6 +41,7 @@ int part2(std::vector<Group> const& groups) {
 }
 
 int main() {
+	
 	std::vector<Group> groups;
 	std::string line;
 	std::ifstream file("input/day6.txt");
@@ -53,6 +54,6 @@ int main() {
 		groups.push_back(std::move(group));
 	}
 
-	std::cout << "Answer to part 1: " << part1(groups) << std::endl;
-	std::cout << "Answer to part 2: " << part2(groups) << std::endl;
+	std::cout << "Answer to part 1: " << part1(groups) << "\n";
+	std::cout << "Answer to part 2: " << part2(groups) << "\n";
 }
