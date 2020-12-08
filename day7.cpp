@@ -4,6 +4,9 @@
 #include <fstream>
 #include <unordered_map>
 #include <unordered_set>
+#include <chrono>
+
+namespace ch = std::chrono;
 
 #include "common/string.hpp"
 
@@ -86,6 +89,10 @@ int main() {
 		rules.forward[base_color] = std::move(entry);
 	}
 	build_reverse(rules);
+	auto start = ch::system_clock::now();
 	std::cout << "Answer to part 1: " << part1(rules) << "\n";
+	auto end = ch::system_clock::now();
+	float ms = ch::duration_cast<ch::microseconds>(end - start).count() / 1000.0f;
+	std::cout << "Took: " << ms << "ms\n";
 	std::cout << "Answer to part 2: " << part2(rules) << "\n";
 }
