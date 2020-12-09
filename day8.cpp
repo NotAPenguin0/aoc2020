@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <chrono>
+namespace ch = std::chrono;
 
 enum class IType {
 	acc,
@@ -28,7 +30,7 @@ public:
 	int acc = 0;
 	uint32_t status = Status::Ok;
 
-	Program(std::vector<Instruction> instructions) : instructions(instructions) {
+	Program(std::vector<Instruction> instructions) : instructions(std::move(instructions)) {
 		
 	}
 
@@ -108,6 +110,7 @@ int part2(Program& program) {
 }
 
 int main() {
+
 	std::ifstream file("input/day8.txt");
 	std::string itype;
 	int arg = 0;
@@ -121,7 +124,13 @@ int main() {
 	}
 	Program prog(std::move(instructions));
 
-	std::cout << "Answer to part 1: " << part1(prog) << "\n";
+	auto start = ch::system_clock::now();
+	int part1_ans = part1(prog);
 	prog.reset();
-	std::cout << "Answer to part 2: " << part2(prog) << "\n";
+	int part2_ans = part2(prog);
+	auto end = ch::system_clock::now();
+	auto cnt = ch::duration_cast<ch::microseconds>(end - start).count();
+	std::cout << "Part 1: " << part1_ans << "\n";
+	std::cout << "Part 2: " << part2_ans << "\n";
+	std::cout << cnt << "us" << std::endl;
 }
