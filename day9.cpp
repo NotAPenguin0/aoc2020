@@ -3,6 +3,7 @@
 #include <iostream>
 #include <utility>
 #include <chrono>
+#include <cinttypes>
 namespace ch = std::chrono;
 
 using u64 = uint64_t;
@@ -62,20 +63,20 @@ u64 part2(std::vector<u64> const& nums, u64 target_idx) {
 }
 
 int main() {
-	std::ifstream file("input/day9.txt");
-	std::vector<u64> nums{};
-	nums.reserve(1000); // We know there are 1000 lines in the input file
-	u64 val = 0;
-	while (file >> val) { nums.push_back(val); }
-
 	auto start = ch::system_clock::now();
+	for (int i = 0; i < 100; ++i) {
+		std::ifstream file("input/day9.txt");
+		std::vector<u64> nums{};
+		nums.reserve(1000); // We know there are 1000 lines in the input file
+		u64 val = 0;
+		while (file >> val) { nums.push_back(val); }
 
-	auto[index, p1] = part1(nums);
-	u64 p2 = part2(nums, index);
-
+		auto [index, p1] = part1(nums);
+		u64 p2 = part2(nums, index);
+		printf("%" PRIu64 " %" PRIu64"\n", p1, p2);
+	}
 	auto end = ch::system_clock::now();
-
-	std::cout << "Answer for part 1: " << p1 << "\n";
-	std::cout << "Answer for part 2: " << p2 << "\n";
-	std::cout << "Time: " << ch::duration_cast<ch::microseconds>(end - start).count() << "us\n";
+	float ms = ch::duration_cast<ch::microseconds>(end - start).count() / 1000.0f;
+	std::cout << "Time: " << ms << "ms\n";
+	std::cout << "Average per run: " << ms / 100.0f << "\n";
 }
