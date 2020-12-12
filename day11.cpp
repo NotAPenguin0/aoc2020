@@ -146,5 +146,5 @@ int main() {
 		volatile int p2 = part2(seats);
 		std::cout << p1 << "\n";
 		std::cout << p2 << "\n";
-	}, 1);
+	}, 100);
 }
